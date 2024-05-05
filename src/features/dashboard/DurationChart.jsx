@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Pie, PieChart, ResponsiveContainer } from "recharts";
+import Heading from "../../ui/Heading.jsx";
 
 const ChartBox = styled.div`
   /* Box */
@@ -26,22 +28,22 @@ const startDataLight = [
   },
   {
     duration: "2 nights",
-    value: 0,
+    value: 3,
     color: "#f97316",
   },
   {
     duration: "3 nights",
-    value: 0,
+    value: 5,
     color: "#eab308",
   },
   {
     duration: "4-5 nights",
-    value: 0,
+    value: 4,
     color: "#84cc16",
   },
   {
     duration: "6-7 nights",
-    value: 0,
+    value: 7,
     color: "#22c55e",
   },
   {
@@ -51,7 +53,7 @@ const startDataLight = [
   },
   {
     duration: "15-21 nights",
-    value: 0,
+    value: 2,
     color: "#3b82f6",
   },
   {
@@ -109,7 +111,7 @@ function prepareData(startData, stays) {
 
   function incArrayValue(arr, field) {
     return arr.map((obj) =>
-      obj.duration === field ? { ...obj, value: obj.value + 1 } : obj
+      obj.duration === field ? { ...obj, value: obj.value + 1 } : obj,
     );
   }
 
@@ -130,3 +132,18 @@ function prepareData(startData, stays) {
 
   return data;
 }
+
+function DurationChart({ confirmedStays }) {
+  return (
+    <ChartBox>
+      <Heading as="h2">Stay duration summary</Heading>
+      <ResponsiveContainer height={240}>
+        <PieChart>
+          <Pie data={startDataLight} nameKey="duration" dataKey="value" />
+        </PieChart>
+      </ResponsiveContainer>
+    </ChartBox>
+  );
+}
+
+export default DurationChart;
